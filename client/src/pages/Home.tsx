@@ -7,6 +7,8 @@ import { ArrowRight, ChevronDown } from 'lucide-react';
  * Color Scheme: Deep charcoal (#1F2937), vibrant orange (#FF6B35), white, cream (#FFF8F0)
  */
 
+const CALENDLY_URL = 'https://calendly.com/keshav-glifiq/glif-demo';
+
 export default function Home() {
   const [visibleSections, setVisibleSections] = useState<Set<string>>(new Set());
   const [expandedUseCase, setExpandedUseCase] = useState('ordinary-claims');
@@ -94,9 +96,9 @@ export default function Home() {
             <a href="#problem" className="text-gray-600 hover:text-[#1F2937] transition">Problem</a>
             <a href="#solution" className="text-gray-600 hover:text-[#1F2937] transition">Solution</a>
             <a href="#use-cases" className="text-gray-600 hover:text-[#1F2937] transition">Use Cases</a>
-            <button className="px-6 py-2 bg-[#FF6B35] text-white rounded-lg font-semibold hover:bg-[#E55A24] transition">
+            <a href={CALENDLY_URL} target="_blank" rel="noopener noreferrer" className="px-6 py-2 bg-[#FF6B35] text-white rounded-lg font-semibold hover:bg-[#E55A24] transition inline-block">
               Let's talk
-            </button>
+            </a>
           </div>
         </div>
       </nav>
@@ -112,9 +114,9 @@ export default function Home() {
               AudRI is not an audit tool. It's a system that turns messy, unstructured documents into reliable, repeatable audit decisions—at scale.
             </p>
             <div className="flex flex-col md:flex-row gap-4 mb-12">
-              <button className="px-8 py-4 bg-[#FF6B35] text-white font-bold rounded-lg hover:bg-[#E55A24] transition transform hover:-translate-y-1 shadow-lg hover:shadow-xl flex items-center gap-2">
+              <a href={CALENDLY_URL} target="_blank" rel="noopener noreferrer" className="px-8 py-4 bg-[#FF6B35] text-white font-bold rounded-lg hover:bg-[#E55A24] transition transform hover:-translate-y-1 shadow-lg hover:shadow-xl flex items-center gap-2 w-fit">
                 Let's talk <ArrowRight size={20} />
-              </button>
+              </a>
               <button className="px-8 py-4 bg-white text-[#1F2937] font-bold rounded-lg border-2 border-[#1F2937] hover:bg-gray-50 transition flex items-center gap-2">
                 View how AudRI transforms your audit process <ArrowRight size={20} />
               </button>
@@ -784,9 +786,9 @@ export default function Home() {
               </p>
             </div>
             <div className="flex flex-col md:flex-row gap-4 justify-center mb-8">
-              <button className="px-8 py-4 bg-[#FF6B35] text-white font-bold rounded-lg hover:bg-[#E55A24] transition transform hover:-translate-y-1 shadow-lg hover:shadow-xl flex items-center justify-center gap-2">
+              <a href={CALENDLY_URL} target="_blank" rel="noopener noreferrer" className="px-8 py-4 bg-[#FF6B35] text-white font-bold rounded-lg hover:bg-[#E55A24] transition transform hover:-translate-y-1 shadow-lg hover:shadow-xl flex items-center justify-center gap-2 w-fit">
                 Let's talk <ArrowRight size={20} />
-              </button>
+              </a>
             </div>
             <p className="text-gray-600 text-lg">
               Prefer email? <a href="mailto:keshav@getaudri.com" className="text-[#FF6B35] font-semibold hover:underline">Reply to this message</a> and we'll share a short walkthrough tailored to your use case.
