@@ -82,6 +82,7 @@ export default function Home() {
         </div>
       </div>
 
+      <div className="relative z-10">
       {/* Navigation */}
       <nav className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
@@ -93,9 +94,9 @@ export default function Home() {
             </div>
           </div>
           <div className="flex items-center gap-6">
-            <a href="#problem" className="text-gray-600 hover:text-[#1F2937] transition">Problem</a>
-            <a href="#solution" className="text-gray-600 hover:text-[#1F2937] transition">Solution</a>
-            <a href="#use-cases" className="text-gray-600 hover:text-[#1F2937] transition">Use Cases</a>
+            <a href="#problem" className="hidden md:inline text-gray-600 hover:text-[#1F2937] transition">Problem</a>
+            <a href="#solution" className="hidden md:inline text-gray-600 hover:text-[#1F2937] transition">Solution</a>
+            <a href="#use-cases" className="hidden md:inline text-gray-600 hover:text-[#1F2937] transition">Use Cases</a>
             <a href={CALENDLY_URL} target="_blank" rel="noopener noreferrer" className="px-6 py-2 bg-[#FF6B35] text-white rounded-lg font-semibold hover:bg-[#E55A24] transition inline-block">
               Let's talk
             </a>
@@ -803,6 +804,7 @@ export default function Home() {
           <p className="text-gray-400">© 2026 AudRI. All rights reserved.</p>
         </div>
       </footer>
+      </div>
     </div>
   );
 }
