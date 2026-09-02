@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>AudRI — Decision Governance for Claims</title>
+<meta name="description" content="AudRI governs every claims file at decision time — and proves why. Decision governance for P&amp;C carriers.">
+<meta property="og:type" content="website" />
+<meta property="og:title" content="AudRI — Decision Governance for Claims" />
+<meta property="og:description" content="AudRI governs every file at decision time — and proves why." />
+<meta property="og:url" content="https://www.getaudri.com" />
+<meta property="og:site_name" content="AudRI" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="AudRI — Decision Governance for Claims" />
+<meta name="twitter:description" content="AudRI governs every file at decision time — and proves why." />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%230f0c0a'/%3E%3Crect x='26' y='26' width='48' height='48' rx='11' fill='%23E25303'/%3E%3C/svg%3E" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700;9..40,800&family=JetBrains+Mono:wght@500;600;700&display=swap" />
+<style>
+:root{
+  --paper-50:#fdfbf6; --paper-100:#faf6ee; --paper-200:#f3ede1; --paper-300:#ece5d6; --paper-400:#ddd3c0;
+  --ink-300:#c4b9a8; --ink-400:#a89c89; --ink-500:#7d7363; --ink-600:#5a5246; --ink-700:#3d362d; --ink-800:#2a2520; --ink-900:#1a1612;
+  --accent-300:#fab07c; --accent-400:#f89868; --accent-500:#f78f5c; --accent-600:#f58550; --accent-700:#d96b38;
+  --brand:#E25303;
+  --danger:#ff6b5c; --danger-dk:#d93025;
+
+  --bg:#161210; --bg-2:#1f1a16; --bg-3:#272019;
+  --ink:#fdfbf6; --ink-soft:#d8cdbb; --ink-mute:#9a8f7d;
+  --hair:rgba(253,251,246,.10); --hair-strong:rgba(253,251,246,.16);
+  --l-bg:#fdfbf6; --l-surface:#ffffff; --l-ink:#2a2520; --l-ink-soft:#5a5246; --l-ink-mute:#7d7363; --l-hair:#ece5d6;
+
+  --font-sans:"DM Sans",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+  --font-mono:"JetBrains Mono",ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+  --r-md:10px; --r-lg:14px; --r-xl:18px; --r-2xl:24px; --r-full:999px;
+  --ease:cubic-bezier(.22,.61,.36,1);
+  --maxw:1160px;
+}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.6 var(--font-sans);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;overflow-x:hidden;}
+a{color:inherit;text-decoration:none;}
+h1,h2,h3{margin:0;text-wrap:balance;letter-spacing:-.03em;font-weight:800;}
+p{margin:0;}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px;}
+.eyebrow{font:600 12px/1 var(--font-mono);letter-spacing:.22em;text-transform:uppercase;color:var(--accent-500);}
+.mono{font-family:var(--font-mono);font-variant-numeric:tabular-nums;}
+
+.btn{display:inline-flex;align-items:center;gap:.5em;font:700 15px/1 var(--font-sans);padding:16px 26px;border-radius:var(--r-md);border:1.5px solid transparent;cursor:pointer;transition:transform .18s var(--ease),box-shadow .2s var(--ease),background .2s var(--ease),border-color .2s var(--ease);}
+.btn-primary{background:var(--accent-600);color:#241206;}
+.btn-primary:hover{background:var(--accent-500);transform:translateY(-2px);box-shadow:0 12px 30px -8px rgba(245,133,80,.55);}
+.btn-ghost{background:transparent;color:var(--ink);border-color:var(--hair-strong);}
+.btn-ghost:hover{border-color:var(--accent-500);color:var(--accent-400);}
+.btn:focus-visible{outline:none;box-shadow:0 0 0 3px rgba(245,133,80,.4);}
+.arrow{transition:transform .18s var(--ease);}
+.btn:hover .arrow{transform:translateX(4px);}
+
+header.nav{position:sticky;top:0;z-index:60;background:rgba(22,18,16,.72);backdrop-filter:blur(12px);border-bottom:1px solid var(--hair);}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;height:70px;}
+.brand{display:flex;align-items:center;gap:11px;font-weight:800;font-size:20px;letter-spacing:-.02em;}
+.brand .word{color:#fff;} .brand .word b{color:var(--accent-500);font-weight:800;}
+.nav-links{display:flex;align-items:center;gap:30px;}
+.nav-links a{font-size:14.5px;color:var(--ink-soft);font-weight:500;}
+.nav-links a:hover{color:#fff;}
+.nav-cta{padding:11px 18px;font-size:14px;}
+@media(max-width:820px){.nav-links a:not(.nav-cta){display:none;}}
+
+.hero{position:relative;overflow:hidden;padding:112px 0 92px;}
+.hero::before{content:"";position:absolute;z-index:0;inset:-20% -10% auto -10%;height:120%;background:radial-gradient(60% 55% at 78% 8%,rgba(226,83,3,.30),transparent 62%),radial-gradient(50% 50% at 12% 80%,rgba(245,133,80,.14),transparent 60%);pointer-events:none;}
+.hero::after{content:"";position:absolute;z-index:0;inset:0;pointer-events:none;background-image:linear-gradient(var(--hair) 1px,transparent 1px),linear-gradient(90deg,var(--hair) 1px,transparent 1px);background-size:52px 52px;mask-image:radial-gradient(80% 60% at 50% 0%,#000,transparent 75%);opacity:.5;}
+.hero .wrap{position:relative;z-index:1;}
+.hero h1{font-size:clamp(46px,7.4vw,88px);line-height:.98;font-weight:800;letter-spacing:-.035em;max-width:15ch;}
+.hero-points{margin-top:32px;display:grid;gap:16px;max-width:52ch;}
+.hero-points p{font-size:clamp(16px,1.9vw,20px);line-height:1.5;color:var(--ink-soft);padding-left:18px;border-left:3px solid var(--accent-600);}
+.hero-points b{color:#fff;font-weight:700;}
+.hero .lede{margin-top:30px;font-size:clamp(16px,1.7vw,19px);line-height:1.5;color:var(--ink-soft);max-width:46ch;}
+.hero .lede b{color:#fff;font-weight:600;}
+.hero-cta{margin-top:34px;display:flex;flex-wrap:wrap;gap:14px;align-items:center;}
+
+.cred{border-top:1px solid var(--hair);border-bottom:1px solid var(--hair);background:rgba(255,255,255,.015);padding:22px 0;}
+.cred .wrap{text-align:center;}
+.cred .lab{font:500 14px/1.5 var(--font-sans);color:var(--ink-soft);letter-spacing:.01em;}
+
+section{padding:92px 0;position:relative;}
+.sec-head{max-width:64ch;margin-bottom:48px;}
+.sec-head h2{font-size:clamp(30px,4.4vw,48px);line-height:1.04;font-weight:800;margin-top:14px;letter-spacing:-.03em;}
+.sec-head p{margin-top:18px;font-size:18px;line-height:1.55;color:var(--ink-soft);}
+.pop{color:var(--accent-500);}
+.light{background:var(--l-bg);color:var(--l-ink);}
+.light .eyebrow{color:var(--accent-700);}
+.light .sec-head p{color:var(--l-ink-soft);}
+.light .sec-head h2{color:var(--l-ink);}
+
+.gaps{display:grid;grid-template-columns:1fr 1fr;gap:22px;}
+@media(max-width:820px){.gaps{grid-template-columns:1fr;}}
+.gap{background:var(--bg-2);color:var(--ink);border:1px solid var(--hair);border-radius:var(--r-2xl);padding:34px;position:relative;overflow:hidden;transition:transform .25s var(--ease),border-color .25s var(--ease);}
+.gap:hover{transform:translateY(-4px);border-color:var(--hair-strong);}
+.gap .tag{font:700 12px/1 var(--font-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--accent-500);}
+.gap h3{font-size:26px;margin-top:14px;font-weight:800;letter-spacing:-.02em;}
+.gap p{margin-top:14px;color:var(--ink-soft);font-size:15.5px;}
+.gap .fig{margin-top:24px;font:800 38px/1 var(--font-mono);letter-spacing:-.03em;}
+.gap .fig small{display:block;font:500 12.5px/1.5 var(--font-mono);letter-spacing:.01em;color:var(--ink-mute);margin-top:10px;}
+.gap.money .fig{color:var(--accent-500);}
+.gap.money::before,.gap.liability::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;}
+.gap.money::before{background:var(--accent-600);}
+.gap.liability::before{background:var(--danger);}
+.gap.liability{border-color:rgba(255,107,92,.28);}
+.gap.liability .fig{color:var(--danger);font-size:30px;}
+
+.record{background:linear-gradient(180deg,#231d17,#1a1511);border:1px solid var(--hair-strong);border-radius:var(--r-2xl);padding:36px;box-shadow:0 30px 60px -30px rgba(0,0,0,.7);}
+.record .rlab{font:700 11px/1 var(--font-mono);letter-spacing:.18em;text-transform:uppercase;color:var(--accent-500);}
+.record .claimid{margin-top:12px;font:500 13px/1 var(--font-mono);color:var(--ink-mute);}
+.record .decision{margin-top:8px;font:800 26px/1.2 var(--font-sans);letter-spacing:-.02em;color:#fff;}
+.rlines{margin-top:26px;display:grid;gap:1px;background:var(--hair);border-radius:var(--r-md);overflow:hidden;}
+.rline{display:grid;grid-template-columns:150px 1fr;gap:16px;background:#221c17;padding:15px 18px;}
+@media(max-width:600px){.rline{grid-template-columns:1fr;gap:4px;}}
+.rline .k{font:700 11px/1.4 var(--font-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--ink-mute);align-self:center;}
+.rline .v{font:500 14px/1.5 var(--font-mono);color:var(--paper-100);}
+.rline .v .src{color:var(--accent-400);}
+.record .foot{margin-top:22px;font-size:13.5px;color:var(--ink-mute);}
+.what-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;}
+@media(max-width:900px){.what-grid{grid-template-columns:1fr;gap:34px;}}
+.what-copy h2{font-size:clamp(30px,4.2vw,44px);line-height:1.05;font-weight:800;letter-spacing:-.03em;}
+.what-copy p{margin-top:20px;color:var(--ink-soft);font-size:17px;}
+.what-copy .pull{margin-top:22px;font-size:16.5px;color:#fff;border-left:3px solid var(--accent-600);padding-left:18px;}
+
+.threeE{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+@media(max-width:820px){.threeE{grid-template-columns:1fr;}}
+.ecard{background:var(--l-surface);border:1px solid var(--l-hair);border-radius:var(--r-xl);padding:30px;transition:transform .25s var(--ease),box-shadow .25s var(--ease);}
+.ecard:hover{transform:translateY(-4px);box-shadow:0 20px 40px -22px rgba(40,30,20,.28);}
+.ecard .n{font:700 13px/1 var(--font-mono);letter-spacing:.08em;color:var(--accent-700);}
+.ecard h3{margin-top:14px;font-size:26px;font-weight:800;letter-spacing:-.02em;color:var(--l-ink);}
+.ecard p{margin-top:12px;color:var(--l-ink-soft);font-size:15px;}
+.threeE-foot{margin-top:26px;display:flex;flex-wrap:wrap;gap:10px;}
+.pill{font:600 13px/1 var(--font-sans);padding:10px 16px;border-radius:var(--r-full);background:#fff5ee;color:#a85026;border:1px solid #fccda9;}
+
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;}
+@media(max-width:820px){.stats{grid-template-columns:1fr 1fr;}}
+.stat{background:var(--bg-2);border:1px solid var(--hair);border-radius:var(--r-lg);padding:30px 26px;}
+.stat .num{font:800 40px/1 var(--font-mono);letter-spacing:-.04em;color:#fff;}
+.stat .num .u{font-size:23px;color:var(--accent-500);}
+.stat .cap{margin-top:14px;font-size:13.5px;color:var(--ink-soft);line-height:1.5;}
+
+.wants{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
+@media(max-width:820px){.wants{grid-template-columns:1fr 1fr;}}
+@media(max-width:520px){.wants{grid-template-columns:1fr;}}
+.want{background:var(--l-surface);border:1px solid var(--l-hair);border-radius:var(--r-md);padding:18px 20px;display:flex;align-items:center;gap:12px;font-size:15px;color:var(--l-ink-soft);font-weight:500;}
+.want .dot{width:7px;height:7px;border-radius:50%;background:var(--accent-500);flex:none;}
+
+.final{text-align:center;padding:120px 0;position:relative;overflow:hidden;}
+.final::before{content:"";position:absolute;inset:0;background:radial-gradient(60% 90% at 50% 120%,rgba(226,83,3,.28),transparent 60%);pointer-events:none;}
+.final .wrap{position:relative;z-index:1;}
+.final h2{font-size:clamp(34px,5.2vw,58px);font-weight:800;line-height:1.02;letter-spacing:-.035em;max-width:20ch;margin:0 auto;}
+.final p{margin:20px auto 0;max-width:48ch;color:var(--ink-soft);font-size:18px;}
+.final .btn{margin-top:34px;}
+.final .fnote{margin-top:22px;font:600 13px/1 var(--font-mono);letter-spacing:.06em;color:var(--ink-mute);}
+.final.light p{color:var(--l-ink-soft);}
+.final.light .fnote{color:var(--l-ink-mute);}
+
+footer{border-top:1px solid var(--hair);padding:36px 0;}
+.foot-inner{display:flex;flex-wrap:wrap;gap:14px;justify-content:space-between;align-items:center;color:var(--ink-mute);font-size:13.5px;}
+
+/* ---------- mobile polish ---------- */
+@media(max-width:600px){
+  .wrap{padding:0 18px;}
+  section{padding:60px 0;}
+  .hero{padding:66px 0 56px;}
+  .hero h1{font-size:clamp(34px,9vw,46px);}
+  .hero-points{margin-top:26px;}
+  .hero-points p{font-size:16px;padding-left:14px;}
+  .hero .lede{margin-top:24px;}
+  .hero-cta{margin-top:28px;}
+  .hero-cta .btn{width:100%;justify-content:center;}
+  .sec-head{margin-bottom:34px;}
+  .sec-head h2{font-size:clamp(26px,7.5vw,34px);}
+  .sec-head p{font-size:16px;}
+  .gap{padding:26px;}
+  .gap h3{font-size:22px;}
+  .gap .fig{font-size:32px;}
+  .record{padding:26px;}
+  .ecard{padding:24px;}
+  .ecard h3{font-size:22px;}
+  .stats{grid-template-columns:1fr;}
+  .final{padding:82px 0;}
+  .nav-inner{height:62px;}
+  .nav-cta{padding:10px 15px;}
+}
+
+.reveal{transition:opacity .7s var(--ease),transform .7s var(--ease);}
+.reveal.pre{opacity:0;transform:translateY(20px);}
+.reveal.in{opacity:1;transform:none;}
+@media(prefers-reduced-motion:reduce){
+  .reveal,.reveal.pre{opacity:1!important;transform:none!important;transition:none;}
+  html{scroll-behavior:auto;}
+  .btn,.arrow,.gap,.ecard{transition:none;}
+}
+</style>
+</head>
+<body>
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a class="brand" href="#top" aria-label="AudRI home">
+      <svg width="30" height="30" viewBox="0 0 100 100" aria-hidden="true">
+        <rect width="100" height="100" rx="22" fill="#0f0c0a"></rect>
+        <rect x="26" y="26" width="48" height="48" rx="11" fill="#E25303"></rect>
+        <g fill="#FAD9D2" transform="translate(50 50)">
+          <ellipse cx="0" cy="-11" rx="4.6" ry="8"></ellipse>
+          <ellipse cx="0" cy="-11" rx="4.6" ry="8" transform="rotate(60)"></ellipse>
+          <ellipse cx="0" cy="-11" rx="4.6" ry="8" transform="rotate(120)"></ellipse>
+          <ellipse cx="0" cy="-11" rx="4.6" ry="8" transform="rotate(180)"></ellipse>
+          <ellipse cx="0" cy="-11" rx="4.6" ry="8" transform="rotate(240)"></ellipse>
+          <ellipse cx="0" cy="-11" rx="4.6" ry="8" transform="rotate(300)"></ellipse>
+        </g>
+      </svg>
+      <span class="word">Aud<b>RI</b></span>
+    </a>
+    <nav class="nav-links">
+      <a href="#problem">The problem</a>
+      <a href="#how">How it works</a>
+      <a href="#proof">Reconstruction</a>
+      <a href="#contact" class="btn btn-primary nav-cta">Contact us</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap">
+      <p class="eyebrow reveal">For P&amp;C carriers</p>
+      <h1 class="reveal">Decision Governance for Claims</h1>
+      <div class="hero-points reveal">
+        <p><b>Optimize the claims process</b> — govern every file at decision time, for full-book visibility rather than a sample.</p>
+        <p><b>Reconstruct any decision</b> — the rule, the authority, the evidence, and the human reasoning, preserved with the file.</p>
+      </div>
+      <p class="lede reveal">AudRI governs every file at decision time — <b>and proves why.</b></p>
+      <div class="hero-cta reveal">
+        <a href="#contact" class="btn btn-primary">Contact us <span class="arrow">→</span></a>
+        <a href="#how" class="btn btn-ghost">See how it works</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CREDIBILITY -->
+  <div class="cred">
+    <div class="wrap">
+      <span class="lab">Built by a team with deep roots in enterprise content and information software.</span>
+    </div>
+  </div>
+
+  <!-- THE PROBLEM -->
+  <section id="problem" class="light">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <p class="eyebrow">The problem</p>
+        <h2>Two gaps persist in claims operations:<br>the <span class="pop" style="white-space:nowrap">Money Gap</span> and the <span class="pop" style="white-space:nowrap">Liability Gap</span>.<br>AI is widening both.</h2>
+        <p>Traditional sampling gives carriers visibility into a fraction of the claims book. Across the rest, financial exposure and decision rationale are harder to see — and AI-driven processing is accelerating the pace.</p>
+      </div>
+      <div class="gaps">
+        <div class="gap money reveal">
+          <span class="tag">The Money Gap</span>
+          <h3>Full visibility across the book — not a sample.</h3>
+          <p>Manual QA typically reviews 3–5% of files after they close; AudRI evaluates 100%. Limited sampling can leave leakage, fraud, and reserve errors outside the reviewed population — across the other ~95% of the book.</p>
+          <div class="fig">$6–14M<small>Illustrative recoverable exposure on a $200M claims book — the gap between typical claims leakage (industry benchmarks ~5–10%) and best-in-class handling (~2–3%).</small></div>
+        </div>
+        <div class="gap liability reveal">
+          <span class="tag">The Liability Gap</span>
+          <h3>Traceable rationale, across every system.</h3>
+          <p>Most carriers already have controls in place. But as AI accelerates decisions, the rationale and authority behind a call can fragment across systems and workflows — and become hard to reconstruct when it's later questioned. AudRI keeps it auditable, traceable, and defensible.</p>
+          <div class="fig">Now<small>Policyholder attorneys are already developing AI-based bad-faith claims that seek the reasoning behind coverage and valuation decisions (Simpson Thacher, Aug 2026).</small></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHAT AudRI DOES -->
+  <section id="what">
+    <div class="wrap">
+      <div class="what-grid">
+        <div class="what-copy reveal">
+          <p class="eyebrow">What AudRI does</p>
+          <h2>It governs the decision — <span class="pop">not just whether a step was completed.</span></h2>
+          <p>Traditional QA confirms a process step was followed. AudRI governs the decision itself: whether the right amount went to the right party, for a defensible reason, under the appropriate authority — and it preserves that reasoning with the file.</p>
+          <p class="pull">Systems of record store the claim. Dashboards report on it after the fact. AudRI governs the decision at the moment it's made.</p>
+        </div>
+        <div class="record reveal" role="img" aria-label="Example governed claim decision with rule, authority, evidence, and human reasoning">
+          <p class="rlab">Governed decision</p>
+          <p class="claimid">CLAIM&nbsp;WC-2026-04821 · reserve set</p>
+          <p class="decision">$48,500 — approved to claimant</p>
+          <div class="rlines">
+            <div class="rline"><span class="k">Rule</span><span class="v"><span class="src">WC Handling Std §4.2</span> — reserve reflects confirmed TTD + PPD exposure</span></div>
+            <div class="rline"><span class="k">Authority</span><span class="v">M. Alvarez, VP Claims — owns reserve standard v3.1</span></div>
+            <div class="rline"><span class="k">Evidence</span><span class="v">IME report, wage statement, treating-physician note</span></div>
+            <div class="rline"><span class="k">Override</span><span class="v">Adjuster raised reserve +$6,000 — rationale recorded</span></div>
+          </div>
+          <p class="foot">Every element — rule, authority, evidence, and human reasoning — stays part of the durable decision record.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW (light) -->
+  <section id="how" class="light">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <p class="eyebrow">How it works</p>
+        <h2 style="color:var(--l-ink)">Extract. Execute. <span class="pop">Explain.</span></h2>
+        <p>Deterministic execution where it matters, with human oversight throughout.</p>
+      </div>
+      <div class="threeE">
+        <div class="ecard reveal"><span class="n">01</span><h3>Extract</h3><p>Your rules, made executable — pulled from your SOPs, policy contracts, and regulatory bulletins, each tied to the clause, page, and authority it came from.</p></div>
+        <div class="ecard reveal"><span class="n">02</span><h3>Execute</h3><p>Every file is evaluated against the current rule set at decision time — 100% coverage, at the moment the decision is made.</p></div>
+        <div class="ecard reveal"><span class="n">03</span><h3>Explain</h3><p>The reasoning and evidence are preserved with the decision — the rule, the named authority, and the supporting record.</p></div>
+      </div>
+      <div class="threeE-foot reveal">
+        <span class="pill">Deterministic execution</span>
+        <span class="pill">100% coverage</span>
+        <span class="pill">Humans retain decision authority</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- RECONSTRUCTION -->
+  <section id="proof">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <p class="eyebrow">Reconstruction &amp; oversight</p>
+        <h2>When a decision is questioned, <span class="pop">reconstruct exactly why.</span></h2>
+        <p style="color:var(--ink-soft)">A complete, decision-level reconstruction — the rule, the authority, the evidence, and the human reasoning behind every call.</p>
+      </div>
+      <div class="gaps">
+        <div class="gap money reveal">
+          <span class="tag">Human override</span>
+          <h3>Overrides become part of the record.</h3>
+          <p>An adjuster can override any AudRI call — humans retain decision authority. The override, and the rationale behind it, become part of the durable decision record rather than living in memory.</p>
+        </div>
+        <div class="gap money reveal">
+          <span class="tag">Independence</span>
+          <h3>An independent governance layer.</h3>
+          <p>The system that executes a decision shouldn't be the only system that attests to it. AudRI sits independently across the claim file and decision process — and that independence and cross-file visibility strengthen auditability, regulatory defensibility, and litigation readiness.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BUSINESS VALUE -->
+  <section id="dollars" class="light">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <p class="eyebrow">Business value</p>
+        <h2>Outcomes, <span class="pop">not licensing structure.</span></h2>
+        <p>Dollars protected, decisions governed, and measurable movement toward best-in-class claims performance — extending the reach of the QA work your team already performs.</p>
+      </div>
+      <div class="stats">
+        <div class="stat reveal"><div class="num">100<span class="u">%</span></div><div class="cap">of decisions governed at decision time, across the entire book</div></div>
+        <div class="stat reveal"><div class="num">5–10<span class="u">%</span></div><div class="cap">typical industry claims leakage AudRI helps carriers reduce</div></div>
+        <div class="stat reveal"><div class="num"><span class="u">$</span>6–14<span class="u">M</span></div><div class="cap">illustrative recoverable exposure on a $200M claims book</div></div>
+        <div class="stat reveal"><div class="num">2–3<span class="u">%</span></div><div class="cap">best-in-class leakage — the benchmark AudRI moves you toward</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CAPABILITIES (light) -->
+  <section id="capabilities">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <p class="eyebrow">Quality, extended</p>
+        <h2>The quality work you already do — <span class="pop">across every file.</span></h2>
+        <p>Claims-quality management, SOP adherence, coaching, and reporting are natural outcomes of governing every decision — extending your team's reach across the entire claims book, not replacing the work they do.</p>
+      </div>
+      <div class="wants">
+        <div class="want reveal"><span class="dot"></span>Claims-quality management</div>
+        <div class="want reveal"><span class="dot"></span>SOP &amp; handling-standard adherence</div>
+        <div class="want reveal"><span class="dot"></span>Adjuster coaching signals</div>
+        <div class="want reveal"><span class="dot"></span>Real-time reporting</div>
+        <div class="want reveal"><span class="dot"></span>Cycle-time visibility</div>
+        <div class="want reveal"><span class="dot"></span>Return-to-work tracking (WC)</div>
+        <div class="want reveal"><span class="dot"></span>Repair-facility &amp; vendor handling (auto)</div>
+        <div class="want reveal"><span class="dot"></span>Reserve-adequacy checks</div>
+        <div class="want reveal"><span class="dot"></span>Exam-ready evidence</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section class="final light" id="contact">
+    <div class="wrap">
+      <p class="eyebrow reveal">Get started</p>
+      <h2 class="reveal">See decision governance <span class="pop">on your own claims.</span></h2>
+      <p class="reveal">Govern every file at decision time, reconstruct any decision, and extend your team's quality reach across the entire book.</p>
+      <div class="reveal"><a href="mailto:contact@getaudri.com" class="btn btn-primary">Contact us <span class="arrow">→</span></a></div>
+      <p class="fnote reveal">contact@getaudri.com · getaudri.com</p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap foot-inner">
+    <span class="brand" style="font-size:17px;">Aud<b style="color:var(--accent-500)">RI</b></span>
+    <span>Decision Governance for Claims · © 2026 AudRI</span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var reduce=false;
+  try{reduce=window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches;}catch(e){}
+  try{
+    var els=document.querySelectorAll(".reveal");
+    if(!reduce&&("IntersectionObserver"in window)){
+      els.forEach(function(e){e.classList.add("pre");});
+      var io=new IntersectionObserver(function(en){en.forEach(function(x){if(x.isIntersecting){x.target.classList.add("in");io.unobserve(x.target);}});},{threshold:.12,rootMargin:"0px 0px -8% 0px"});
+      els.forEach(function(e,idx){e.style.transitionDelay=(Math.min(idx%4,3)*55)+"ms";io.observe(e);});
+      setTimeout(function(){els.forEach(function(e){if(!e.classList.contains("in"))e.classList.add("in");});},1500);
+    }
+  }catch(e){}
+})();
+</script>
+<script>
+  window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+</script>
+<script defer src="/_vercel/insights/script.js"></script>
+</body>
+</html>

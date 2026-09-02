@@ -1,5 +1,7 @@
 {
-  "buildCommand": "pnpm build",
-  "outputDirectory": "dist/public",
-  "installCommand": "pnpm install"
+  "framework": null,
+  "installCommand": "echo skipping-install",
+  "buildCommand": "mkdir -p .vercel-static && cp AudRILandingDecGovern/index.html .vercel-static/index.html && echo 'PRODUCTION 2026-09-02: AudRILandingDecGovern/index.html — Decision Governance for Claims'",
+  "outputDirectory": ".vercel-static",
+  "cleanUrls": true
 }
